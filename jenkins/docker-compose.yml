@@ -1,0 +1,23 @@
+---
+#
+#
+# docker-compose up --build
+#
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      context: .
+    ports:
+      - 80:8080
+      - 50000:50000
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - ./conf:/var/jenkins_config/
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_config/jenkins.yaml
+      - JENKINS_ADMIN_ID=admin
+      - JENKINS_ADMIN_PASSWORD=admin
+volumes:
+  jenkins_home:
