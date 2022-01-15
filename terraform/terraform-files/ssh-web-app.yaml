@@ -1,0 +1,20 @@
+groups:
+  - ubuntu: [root,sys]
+  - hashicorp
+
+users:
+  - default
+  - name: deploy
+    gecos: deploy
+    shell: /bin/bash
+    primary_group: hashicorp
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    lock_passwd: false
+    ssh_authorized_keys:
+      -file(/ssh/id_rsa.pub)
+
+packages:
+  - python3
+runcmd:
+  -   alias python=python3
